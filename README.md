@@ -6,7 +6,7 @@ A modern and intuitive **MERN stack Project Management Dashboard** to create, ma
 💻 **Backend API:** [Railway Deployment](https://projectmanagementdashboard-production.up.railway.app)  
 _(⚠️ Note: This is a REST API, so opening the link directly may not show UI. Try endpoints like `/health`.)_
 
----
+----
 
 ## ✨ Features
 - 🔐 User Authentication (JWT + Cookies)
