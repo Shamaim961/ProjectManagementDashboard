@@ -82,4 +82,4 @@ npm run dev
 ---
 
 ## 👩‍💻 Author
-Developed with ❤️ by [Momina Imran](https://your-portfolio-link.com)
+Developed with ❤️ by [Shamaim Fatima]
