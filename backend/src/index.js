@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5001;
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://project-management-dashboard-ochre.vercel.app",
+  'https://project-management-dashboard-4ops.vercel.app',
 ];
 
 app.use(
