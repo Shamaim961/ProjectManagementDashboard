@@ -7,8 +7,15 @@ export const signupUser = async (data) => {
 
 export const loginUser = async (data) => {
   const res = await apiClient.post("/auth/login", data);
+
+  // Agar login successful ho to token save karo
+  if (res.data.token) {
+    localStorage.setItem("token", res.data.token);
+  }
+
   return res.data;
 };
+
 
 export const logoutUser = async () => {
   const res = await apiClient.post("/auth/logout");

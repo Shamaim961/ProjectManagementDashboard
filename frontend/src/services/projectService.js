@@ -1,26 +1,31 @@
-import apiClient from "./apiClient";
-
-export const createProjectService = async (data) => {
-  const res = await apiClient.post("/projects", data);
-  return res.data;
-};
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getProjectsService = async () => {
-  const res = await apiClient.get("/projects");
-  return res.data;
+  const token = localStorage.getItem("token");
+  const res = await fetch(`${BASE_URL}/projects`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) throw await res.json();
+  return await res.json();
 };
 
-export const getProjectService = async (id) => {
-  const res = await apiClient.get(`/projects/${id}`);
-  return res.data;
+export const createProjectService = async (data) => {
+  const token = localStorage.getItem("token");
+  const res = await fetch(`${BASE_URL}/projects`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw await res.json();
+  return await res.json();
 };
 
-export const updateProjectService = async (id, data) => {
-  const res = await apiClient.put(`/projects/${id}`, data);
-  return res.data;
-};
+// updateProjectService and deleteProjectService same pattern
 
-export const deleteProjectService = async (id) => {
-  const res = await apiClient.delete(`/projects/${id}`);
-  return res.data;
-};

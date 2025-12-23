@@ -1,22 +1,32 @@
-import apiClient from "./apiClient";
-
-export const createTaskService = async (data) => {
-  const res = await apiClient.post("/tasks", data);
-  return res.data;
-};
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getTasksService = async (projectId) => {
-  const endpoint = projectId ? `/tasks?project=${projectId}` : `/tasks`;
-  const res = await apiClient.get(endpoint);
-  return res.data;
+  const token = localStorage.getItem("token");
+  const query = projectId ? `?projectId=${projectId}` : "";
+  const res = await fetch(`${BASE_URL}/tasks${query}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+  });
+  if (!res.ok) throw await res.json();
+  return await res.json();
 };
 
-export const updateTaskService = async (id, data) => {
-  const res = await apiClient.put(`/tasks/${id}`, data);
-  return res.data;
+export const createTaskService = async (data) => {
+  const token = localStorage.getItem("token");
+  const res = await fetch(`${BASE_URL}/tasks`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw await res.json();
+  return await res.json();
 };
 
-export const deleteTaskService = async (id) => {
-  const res = await apiClient.delete(`/tasks/${id}`);
-  return res.data;
-};
+// updateTaskService and deleteTaskService same pattern with Authorization header
+
